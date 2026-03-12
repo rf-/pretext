@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Logo Columns</title>
+    <style>
+      :root {
+        color-scheme: light;
+        --paper: #f6f0e6;
+        --ink: #11100d;
+        --muted: #4f463b;
+        --accent: #d97757;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        margin: 0;
+        min-height: 100%;
+        background: var(--paper);
+        color: var(--ink);
+      }
+
+      body {
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      }
+
+      .page {
+        position: relative;
+        min-height: 100vh;
+        overflow: hidden;
+      }
+
+      .stage {
+        position: relative;
+        min-height: 100vh;
+      }
+
+      .headline {
+        position: absolute;
+        margin: 0;
+        font-family: "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Palatino, serif;
+        font-weight: 700;
+        font-size: clamp(3.7rem, 6vw, 6.2rem);
+        line-height: 0.92;
+        letter-spacing: -0.05em;
+      }
+
+      .logo {
+        position: absolute;
+        display: block;
+        user-select: none;
+        pointer-events: none;
+      }
+
+      .logo--openai {
+        filter: drop-shadow(0 26px 34px rgba(16, 16, 12, 0.14));
+      }
+
+      .logo--claude {
+        filter: drop-shadow(0 24px 32px rgba(140, 86, 52, 0.18));
+      }
+
+      .line {
+        position: absolute;
+        white-space: pre;
+        font: 18px/28px "Helvetica Neue", Helvetica, Arial, sans-serif;
+        color: var(--ink);
+      }
+
+      @media (max-width: 900px) {
+        .line {
+          font-size: 16px;
+          line-height: 25px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="page">
+      <div id="stage" class="stage">
+        <h1 id="headline" class="headline">LOGOS IN THE MARGIN</h1>
+        <img id="openai-logo" class="logo logo--openai" alt="OpenAI symbol" src="./assets/openai-symbol.svg" />
+        <img id="claude-logo" class="logo logo--claude" alt="Claude symbol" src="./assets/claude-symbol.svg" />
+      </div>
+    </main>
+
+    <script type="module" src="./logo-columns.ts"></script>
+  </body>
+</html>
