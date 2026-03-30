@@ -577,20 +577,19 @@ export async function loadHashReport<T extends { requestId?: string }>(
   for (let i = 0; i < attempts; i++) {
     await sleep(100)
     const currentUrl = await session.readLocationUrl()
-    const reportJson = readNavigationReportText(currentUrl)
-    if (reportJson === '' || reportJson === 'null') continue
-
-    const report = JSON.parse(reportJson) as T
-    if (report.requestId === expectedRequestId) {
-      return report
-    }
-
     const phase = readNavigationPhaseState(currentUrl)
     if (
       phase !== null &&
       (phase.requestId === undefined || phase.requestId === expectedRequestId)
     ) {
       lastPhase = phase.phase
+    }
+    const reportJson = readNavigationReportText(currentUrl)
+    if (reportJson === '' || reportJson === 'null') continue
+
+    const report = JSON.parse(reportJson) as T
+    if (report.requestId === expectedRequestId) {
+      return report
     }
   }
 

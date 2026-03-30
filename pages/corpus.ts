@@ -104,6 +104,15 @@ type CorpusSweepRow = {
   diffPx: number
   predictedLineCount: number
   browserLineCount: number
+  browserLineMethod?: 'span-probe' | 'range'
+  maxLineWidthDrift?: number
+  firstBreakMismatch?: {
+    line: number
+    deltaText: string
+    reasonGuess: string
+    oursContext: string
+    browserContext: string
+  } | null
 }
 
 type CorpusLineMismatch = {
@@ -914,6 +923,21 @@ function toSweepRow(report: CorpusReport): CorpusSweepRow {
     diffPx: report.diffPx,
     predictedLineCount: report.predictedLineCount,
     browserLineCount: report.browserLineCount,
+    ...(report.browserLineMethod === undefined ? {} : { browserLineMethod: report.browserLineMethod }),
+    ...(report.maxLineWidthDrift === undefined ? {} : { maxLineWidthDrift: report.maxLineWidthDrift }),
+    ...(report.firstBreakMismatch === undefined
+      ? {}
+      : report.firstBreakMismatch === null
+        ? { firstBreakMismatch: null }
+        : {
+            firstBreakMismatch: {
+              line: report.firstBreakMismatch.line,
+              deltaText: report.firstBreakMismatch.deltaText,
+              reasonGuess: report.firstBreakMismatch.reasonGuess,
+              oursContext: report.firstBreakMismatch.oursContext,
+              browserContext: report.firstBreakMismatch.browserContext,
+            },
+          }),
   }
 }
 
