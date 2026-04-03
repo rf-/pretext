@@ -41,6 +41,7 @@
     "accuracy-snapshot:safari": "ACCURACY_CHECK_BROWSER=safari bun run scripts/accuracy-check.ts --full --output=accuracy/safari.json",
     "benchmark-check": "bun run scripts/benchmark-check.ts",
     "benchmark-check:safari": "BENCHMARK_CHECK_BROWSER=safari bun run scripts/benchmark-check.ts",
+    "prepare": "bun run build:package",
     "build:package": "rm -rf dist && tsc -p tsconfig.build.json",
     "check": "tsc && oxlint --type-aware src",
     "corpus-check": "bun run scripts/corpus-check.ts",
